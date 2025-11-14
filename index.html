@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PETreminder</title>
+
+<style>
+/* -------------------- ESTILOS GENERALES -------------------- */
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #f5f5f5;
+}
+
+/* -------------------- TEXTURA DE HUELLAS -------------------- */
+:root {
+    --huellas: url('https://i.imgur.com/F3yQK0k.png');
+}
+
+/* -------------------- BARRA SUPERIOR -------------------- */
+header {
+    background: var(--huellas), #007bff;
+    background-size: 70px;
+    background-repeat: repeat;
+    color: white;
+    padding: 20px;
+    text-align: center;
+    position: relative;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 35px;
+}
+
+/* -------------------- BOTÓN MENU -------------------- */
+#menuBtn {
+    position: absolute;
+    left: 15px;
+    top: 18px;
+    font-size: 28px;
+    cursor: pointer;
+    color: white;
+    z-index: 2000;
+}
+
+/* -------------------- MENU LATERAL -------------------- */
+#sideMenu {
+    height: 100%;
+    width: 0;
+    background: var(--huellas), #004a99;
+    background-size: 60px;
+    background-repeat: repeat;
+    position: fixed;
+    top: 0;
+    left: 0;
+    overflow-x: hidden;
+    transition: 0.4s;
+    padding-top: 80px;
+    z-index: 1500;
+}
+
+#sideMenu a {
+    padding: 15px 25px;
+    text-decoration: none;
+    color: white;
+    display: block;
+    font-size: 20px;
+}
+
+#sideMenu a:hover {
+    background: rgba(0,0,0,0.2);
+}
+
+/* -------------------- SECCIONES -------------------- */
+section {
+    display: none;
+    padding: 20px;
+}
+
+.active {
+    display: block;
+}
+
+/* -------------------- TARJETAS -------------------- */
+.card {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 8px rgba(0,0,0,0.1);
+    margin-bottom: 20px;
+}
+
+/* -------------------- BOTONES -------------------- */
+button {
+    background: var(--huellas), #007bff;
+    background-size: 60px;
+    background-repeat: repeat;
+    color: white;
+    padding: 10px 18px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+button:hover {
+    opacity: 0.85;
+}
+
+input, select, textarea {
+    width: 100%;
+    padding: 10px;
+    margin-top: 8px;
+    margin-bottom: 15px;
+    border: 1px solid #aaa;
+    border-radius: 6px;
+}
+
+ul {
+    list-style: none;
+    padding-left: 0;
+}
+
+li {
+    background: #eaf3ff;
+    padding: 10px;
+    border-radius: 6px;
+    margin-bottom: 10px;
+}
+
+/* Imagen mascota */
+.pet-img {
+    width: 90px;
+    border-radius: 10px;
+}
+
+/* ----------- TIENDA ----------- */
+
+.tienda-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 15px;
+}
+
+.producto {
+    background: white;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 0 6px rgba(0,0,0,0.1);
+    text-align: center;
+}
+
+.producto img {
+    width: 120px;
+    height: 120px;
+    border-radius: 10px;
+    object-fit: cover;
+}
+
+.producto button {
+    margin-top: 10px;
+    width: 100%;
+}
+
+/* Imagen donación a la derecha */
+.donacion-img {
+    width: 160px;
+    float: right;
+    margin-left: 15px;
+    border-radius: 12px;
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- -------------------- BARRA SUPERIOR -------------------- -->
+<header>
+    <span id="menuBtn">&#9776;</span>
+    <h1>PETreminder</h1>
+</header>
+
+<!-- -------------------- MENU LATERAL -------------------- -->
+<div id="sideMenu">
+    <a onclick="mostrar('inicio')">🏠 Inicio</a>
+    <a onclick="mostrar('registro')">🐶 Registro de Mascotas</a>
+    <a onclick="mostrar('calendario')">📅 Calendario</a>
+    <a onclick="mostrar('tienda')">🛍️ Tienda Virtual</a>
+    <a onclick="mostrar('donaciones')">💖 Donaciones</a>
+</div>
+
+<!-- -------------------- INICIO -------------------- -->
+<section id="inicio" class="active">
+    <div class="card" style="text-align:center;">
+        <h2 style="font-size:36px; font-weight:bold;">¡Bienvenido a PETreminder!</h2>
+        <p style="font-size:20px;">Controla vacunas, fechas y cuidados de tu mascota.</p>
+
+        <img src="https://i.pinimg.com/736x/ae/68/8a/ae688a5338799ef4ea6269b387144a0f.jpg" 
+             style="width:300px; border-radius:15px; margin-top:15px;">
+    </div>
+</section>
+
+<!-- -------------------- REGISTRO DE MASCOTAS -------------------- -->
+<section id="registro">
+    <div class="card">
+        <h2>Registrar mascota</h2>
+
+        <label>Nombre:</label>
+        <input type="text" id="nombreMascota">
+
+        <label>Edad:</label>
+        <div style="display:flex; gap:10px;">
+            <input type="number" id="edadValor">
+            <select id="edadTipo">
+                <option value="meses">Meses</option>
+                <option value="años">Años</option>
+            </select>
+        </div>
+
+        <label>Raza:</label>
+        <input type="text" id="razaMascota">
+
+        <label>Color:</label>
+        <input type="text" id="colorMascota">
+
+        <label>Foto (opcional):</label>
+        <input type="file" id="fotoMascota" accept="image/*">
+
+        <label>Notas:</label>
+        <textarea id="notasMascota"></textarea>
+
+        <button onclick="guardarMascota()">Guardar Mascota</button>
+
+        <h3>Mascotas Registradas</h3>
+        <ul id="listaMascotas"></ul>
+    </div>
+</section>
+
+<!-- -------------------- CALENDARIO -------------------- -->
+<section id="calendario">
+    <div class="card">
+        <h2>Calendario de Vacunas</h2>
+
+        <label>Fecha:</label>
+        <input type="date" id="fechaVacuna">
+
+        <label>Descripción:</label>
+        <input type="text" id="descVacuna">
+
+        <button onclick="agregarVacuna()">Agregar Recordatorio</button>
+
+        <h3>Recordatorios Guardados</h3>
+        <ul id="listaVacunas"></ul>
+    </div>
+</section>
+
+<!-- -------------------- TIENDA -------------------- -->
+<section id="tienda">
+    <div class="card">
+        <h2>🛍️ Tienda para Mascotas</h2>
+
+        <div class="tienda-grid" id="productosGrid"></div>
+    </div>
+</section>
+
+<!-- -------------------- DONACIONES -------------------- -->
+<section id="donaciones">
+    <div class="card">
+        
+        <!-- IMAGEN A LA DERECHA -->
+        <img class="donacion-img" 
+             src="https://img.freepik.com/vector-gratis/corazon-huellas-patas_78370-3260.jpg">
+
+        <h2>Donaciones</h2>
+        <p>Gracias por apoyar este proyecto 💖</p>
+
+        <p><b>Cuenta bancaria:</b> 000-123-456789 <br> Banco PETBank</p>
+
+        <button onclick="alert('¡Gracias por tu donación! ❤️')">Donar</button>
+    </div>
+</section>
+
+
+<script>
+/* -------------------- MENU -------------------- */
+document.getElementById("menuBtn").onclick = function() {
+    let menu = document.getElementById("sideMenu");
+    menu.style.width = (menu.style.width === "260px") ? "0" : "260px";
+};
+
+function mostrar(id) {
+    document.querySelectorAll("section").forEach(s => s.classList.remove("active"));
+    document.getElementById(id).classList.add("active");
+    document.getElementById("sideMenu").style.width = "0";
+}
+
+/* -------------------- REGISTRO MASCOTAS -------------------- */
+let mascotas = JSON.parse(localStorage.getItem("mascotas")) || [];
+
+function guardarMascota() {
+    const nombre = nombreMascota.value;
+    const edadValor = edadValor.value;
+    const edadTipo = edadTipo.value;
+    const raza = razaMascota.value;
+    const color = colorMascota.value;
+    const notas = notasMascota.value;
+    const fotoFile = fotoMascota.files[0];
+
+    if (!nombre) return alert("El nombre es obligatorio");
+
+    if (fotoFile) {
+        const reader = new FileReader();
+        reader.onload = e => guardarMascotaFinal(nombre, edadValor, edadTipo, raza, color, notas, e.target.result);
+        reader.readAsDataURL(fotoFile);
+    } else {
+        guardarMascotaFinal(nombre, edadValor, edadTipo, raza, color, notas, "");
+    }
+}
+
+function guardarMascotaFinal(nombre, edadValor, edadTipo, raza, color, notas, foto) {
+    mascotas.push({ nombre, edad: `${edadValor} ${edadTipo}`, raza, color, notas, foto });
+    localStorage.setItem("mascotas", JSON.stringify(mascotas));
+    mostrarMascotas();
+}
+
+function mostrarMascotas() {
+    listaMascotas.innerHTML = "";
+    mascotas.forEach(m => {
+        listaMascotas.innerHTML += `
+        <li>
+            ${m.foto ? `<img src="${m.foto}" class="pet-img">` : ""}
+            <b>${m.nombre}</b> - ${m.edad} - ${m.raza} - ${m.color}
+        </li>`;
+    });
+}
+mostrarMascotas();
+
+/* -------------------- VACUNAS -------------------- */
+let vacunas = JSON.parse(localStorage.getItem("vacunas")) || [];
+
+function agregarVacuna() {
+    if (!fechaVacuna.value || !descVacuna.value) return alert("Completa los datos");
+
+    vacunas.push({ fecha: fechaVacuna.value, desc: descVacuna.value });
+    localStorage.setItem("vacunas", JSON.stringify(vacunas));
+    mostrarVacunas();
+}
+
+function mostrarVacunas() {
+    listaVacunas.innerHTML = "";
+    vacunas.forEach(v => {
+        listaVacunas.innerHTML += `<li>${v.fecha} - ${v.desc}</li>`;
+    });
+}
+mostrarVacunas();
+
+/* -------------------- TIENDA -------------------- */
+
+const productos = [
+    { nombre: "Pelota de goma", precio: 15000, img: "https://media.falabella.com/sodimacCO/726690_02/w=1160"},
+    { nombre: "Hueso de juguete", precio: 22000, img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcShXYHQWyAi00KK67gJABV7yrJ1zX6addRfUg&s"},
+    { nombre: "Cama para perro", precio: 95000, img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR6vooIMCSvocWeMo2BHmpcpRQbXv2dYf3O1Q&s"},
+    { nombre: "Plato metálico", precio: 18000, img: "https://http2.mlstatic.com/D_NQ_NP_895773-MCO47232203132_082021-O.webp"},
+    { nombre: "Collar ajustable", precio: 27000, img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTXg7Nj2yTv-8sMKNbwz-DpXep_B-NINg8xOg&s"},
+    { nombre: "Correa reforzada", precio: 35000, img: "https://cdnx.jumpseller.com/pets-sibs/image/39107593/resize/610/610?1693520414"},
+    { nombre: "Galletas premium", precio: 16000, img: "https://encrypted-tbn1.gstatic.com/shopping?q=tbn:ANd9GcQOIaZ2F5z9Drlw_SUm63emGvBA6qPiozN6VaizKIv_nbqAbxWGOgigw4H5XcNh3BM86LKpl9jFjbA8fX9xczUMSHuNWqwZW0S8fd09R90iYYxk7EQy-yLp5g"},
+    { nombre: "Rascador para gatos", precio: 78000, img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTVjr1LM2GmHvm0xiS_HDRK-BMtp-uxjfGl9A&s"},
+    { nombre: "Fuente de agua", precio: 120000, img: "https://www.toptecnouy.com/imgs/productos/productos34_34214.jpg"},
+    { nombre: "Transportadora", precio: 110000, img: "https://http2.mlstatic.com/D_NQ_NP_867520-MLU73861217520_012024-O.webp"},
+    { nombre: "Peine para mascotas", precio: 15000, img: "https://media.falabella.com/falabellaCO/133726662_01/w=1500,h=1500,fit=pad"},
+    { nombre: "Arena para gatos", precio: 28000, img: "https://veterinariaelcountry.com/wp-content/uploads/ARENA-CALABAZA-DE-VAINILLA.png"}
+];
+
+function cargarProductos() {
+    const grid = document.getElementById("productosGrid");
+
+    productos.forEach(p => {
+        grid.innerHTML += `
+        <div class="producto">
+            <img src="${p.img}">
+            <h3>${p.nombre}</h3>
+            <p><b>$${p.precio.toLocaleString()}</b></p>
+            <button onclick="comprar('${p.nombre}')">Comprar</button>
+        </div>`;
+    });
+}
+
+function comprar(nombre) {
+    alert("Has comprado: " + nombre + " 🐾");
+}
+
+cargarProductos();
+
+</script>
+
+</body>
+</html>
