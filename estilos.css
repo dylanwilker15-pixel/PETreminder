@@ -1,0 +1,135 @@
+/* Fuente general */
+body {
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #f2f2f2;
+}
+
+/* Barra superior */
+header {
+    background-color: #1a73e8; /* azul fuerte */
+    color: white;
+    padding: 20px;
+    text-align: center;
+    position: relative;
+    background-image: url('https://i.imgur.com/BP0szE9.png'); /* huellitas */
+    background-repeat: repeat;
+    background-size: 60px;
+}
+
+/* Título centrado */
+header h1 {
+    margin: 0;
+    font-size: 32px;
+    font-weight: bold;
+}
+
+/* Icono menú lateral */
+.menu-icon {
+    position: absolute;
+    top: 15px;
+    left: 20px;
+    font-size: 28px;
+    cursor: pointer;
+    color: white;
+}
+
+/* Barra lateral */
+.sidebar {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: #111;
+    overflow-x: hidden;
+    padding-top: 60px;
+    transition: 0.4s;
+}
+
+.sidebar a {
+    padding: 15px 25px;
+    font-size: 18px;
+    text-decoration: none;
+    color: white;
+    display: block;
+    transition: 0.3s;
+}
+
+.sidebar a:hover {
+    background-color: #1a73e8;
+}
+
+/* Botón cerrar */
+.closebtn {
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    font-size: 35px;
+    color: white;
+    cursor: pointer;
+}
+
+/* Contenido general */
+section {
+    margin: 20px;
+}
+
+/* Tarjetas */
+.card {
+    background: white;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0px 2px 8px rgba(0,0,0,0.2);
+    margin-bottom: 20px;
+}
+
+/* Inputs */
+input, select, textarea {
+    width: 100%;
+    padding: 10px;
+    margin-top: 6px;
+    margin-bottom: 12px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+}
+
+/* Botones */
+button {
+    background-color: #1a73e8;
+    color: white;
+    padding: 12px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    width: 100%;
+    font-size: 16px;
+}
+
+button:hover {
+    background-color: #0b57d0;
+}
+
+/* Mensajes */
+.success {
+    background-color: #d4f5c3;
+    padding: 12px;
+    border-radius: 5px;
+    margin-top: 10px;
+}
+
+.error {
+    background-color: #ffd1d1;
+    padding: 12px;
+    border-radius: 5px;
+    margin-top: 10px;
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    padding: 20px;
+    background-color: #1a73e8;
+    color: white;
+    margin-top: 40px;
+}
